@@ -1,24 +1,2 @@
-FROM node:latest 
-
-#setting up working directory
-WORKDIR /app
-
-# adding '/app/node_modules/.bin' to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-#install ap dependencies
-
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install --silent
-RUN npm install react-script@5.0.1 -g --silent
-
-
-# add app
-
-COPY . ./
-
-
-# start app
-
-CMD ["npm", "start"]
+FROM busybox
+CMD echo "Hello-world"
