@@ -16,7 +16,7 @@ RUN npm install react-scripts@5.0.1 -g --silent
 RUN npm install -D webpack-cli -g --silent
 
 #install nodemon to provide hot-reloading functionality.
-RUN npm install nodemon --save-dev
+# RUN npm install nodemon --save-dev
 
 
 
@@ -26,4 +26,4 @@ COPY . ./
 
 #start app
 #use nodemon to run the react application using npm.
-CMD ["nodemon", "--exec", "npm", "start"]
+CMD ["npm", "start"]
