@@ -1,4 +1,5 @@
-FROM node:latest
+#Here we will use node as the base image.
+FROM node:14.21.1-alpine
 
 # set working directory
 
@@ -11,11 +12,18 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm install --silent
-RUN npm install react-script@5.0.1 -g --silent
+RUN npm install react-scripts@5.0.1 -g --silent
 RUN npm install -D webpack-cli -g --silent
+
+#install nodemon to provide hot-reloading functionality.
+RUN npm install nodemon --save-dev
+
+
+
 
 #add app
 COPY . ./
 
 #start app
-CMD ["npm", "start"]
+#use nodemon to run the react application using npm.
+CMD ["nodemon", "--exec", "npm", "start"]
