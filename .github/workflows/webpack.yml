@@ -15,14 +15,19 @@ jobs:
         node-version: [18.x]
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         
-    - uses: actions/checkout@v2
+    - name: Build
+      run: |
+        npm install
+        npm install -D webpack-cli
+    
     - name: Build the Docker image
       run: |
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
@@ -30,7 +35,4 @@ jobs:
         docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
 
 
-    - name: Build
-      run: |
-        npm install
-        npm install -D webpack-cli
+    
