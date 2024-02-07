@@ -8,6 +8,7 @@ import MovieCard from './MovieCard';
 import './App.css';
 import SearchIcon from './search.svg';
 
+// from omdbapi.com
 const API_URL = 'http://www.omdbapi.com?apikey=bb108390';
 
 // const movie1 = {
